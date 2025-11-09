@@ -1,0 +1,38 @@
+import matplotlib.pyplot as plt
+
+def f(x):
+  return (x+3)**2
+
+def df(x):
+  return 2*(x+3)
+
+x=2
+learning_rate=0.1
+precision=1e-6
+max_iters=100
+
+x_values=[x]
+y_values=[f(x)]
+
+for i in range(max_iters):
+  prev_x=x
+  grad=df(prev_x)
+  x=(prev_x-learning_rate*grad)
+  x_values.append(x)
+  y_values.append(f(x))
+
+  if abs(x-prev_x) < precision:
+    break
+  
+print('The Local Minima occurs at x -',round(x,4))
+print('Minimum Value of y - ',round(f(x),4))
+print('The number of interations -',i+1)
+
+plt.figure(figsize=(8,5))
+plt.plot(x_values,y_values,label="Gradient Descent Path")
+plt.title("Gradient Descent for y = (x + 3)²")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.grid(True)
+plt.legend()
+plt.show()
